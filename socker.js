@@ -11,26 +11,15 @@ if (Meteor.isClient) {
         'click input#refresh-images': function () {
             Meteor.call('getImages');
         },
-        'click input.run': function() {
-            Meteor.call('runContainer');
+        'click input.create': function() {
+            Meteor.call('createContainer', this.Id);
         }
     });
 }
 
 if (Meteor.isServer) {
-    var refreshImages = function(data) {
-        data.split(/\r?\n/).forEach(function(entry) {
-            if (entry && !entry.match(/image id/gi)) {
-                entry = parseLine(entry);
-                Images.insert({
-                    repository: entry[0],
-                    tag: entry[1],
-                    image_id: entry[2],
-                    virtual_size: entry[4]
-                });
-            }
-        });
-    };
+
+
     Meteor.methods({
         getImages: function() {
             var images = HTTP.get('http://localhost:4243/images/json');
@@ -39,14 +28,14 @@ if (Meteor.isServer) {
                 Images.insert(image);
             });
         },
-        getContainers: function() {
-            //var containers = HTTP.get('http://localhost:4243/containers/json');
-            //Images.remove({});
-            //containers.data.forEach(function(container) {
-            //    Images.insert(container);
-            //});
+        createContainer: function(Id) {
+            var params = {"Image":Id};
+            HTTP.post('http://localhost:4243/containers/create', {
+                "data": params
+            });
         },
-        runContainer: function() {
+        startContainer: function() {
+            HTTP.get('http://localhost:4243/images/json');
             console.log('running a container');
         },
         stopContainer: function() {
