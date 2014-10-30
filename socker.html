@@ -15,9 +15,9 @@
     <ul>
     {{#each imagesList}}
         <li>
-        {{repository}} {{tag}} ({{image_id}}, {{virtual_size}})
-            <input type="text" name="command" data-id="{{image_id}}" placeholder="-d">
-            <input class="run" type="button" name="start" data-id="{{image_id}}" value="Run!">
+        {{RepoTags}}, {{Id}}, {{Created}}
+            <input type="text" name="command" data-id="{{Id}}" placeholder="-d">
+            <input class="run" type="button" name="start" data-id="{{Id}}" value="Run!">
         </li>
     {{/each}}
     </ul>

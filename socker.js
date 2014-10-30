@@ -18,12 +18,7 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-    var spawn = Npm.require('child_process').spawn;
-    var parseLine = function(line) {
-        return line.replace(/ {2,}/g, "\t").split("\t");
-    };
     var refreshImages = function(data) {
-        Images.remove({});
         data.split(/\r?\n/).forEach(function(entry) {
             if (entry && !entry.match(/image id/gi)) {
                 entry = parseLine(entry);
@@ -39,13 +34,17 @@ if (Meteor.isServer) {
     Meteor.methods({
         getImages: function() {
             var images = HTTP.get('http://localhost:4243/images/json');
-            console.log(images.statusCode);
-            //var tail = spawn('docker', ['images']);
-            //tail.stdout.setEncoding('utf8');
-            //tail.stdout.on('data', Meteor.bindEnvironment(refreshImages));
+            Images.remove({});
+            images.data.forEach(function(image) {
+                Images.insert(image);
+            });
         },
         getContainers: function() {
-            console.log('listing containers');
+            //var containers = HTTP.get('http://localhost:4243/containers/json');
+            //Images.remove({});
+            //containers.data.forEach(function(container) {
+            //    Images.insert(container);
+            //});
         },
         runContainer: function() {
             console.log('running a container');
