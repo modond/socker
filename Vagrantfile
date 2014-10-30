@@ -56,6 +56,7 @@ chown -R vagrant:vagrant /home/vagrant/.meteorlocal
 export LANGUAGE="en_US.UTF-8"
 echo 'LANGUAGE="en_US.UTF-8"' >> /etc/default/locale
 echo 'LC_ALL="en_US.UTF-8"' >> /etc/default/locale
+echo 'DOCKER_OPTS="${DOCKER_OPTS} -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"' >> /etc/default/docker
 SCRIPT
 
   config.vm.provision "shell", inline: $script
