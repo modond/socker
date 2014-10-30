@@ -22,7 +22,7 @@ if (Meteor.isServer) {
 
     Meteor.methods({
         getImages: function() {
-            var images = HTTP.get('http://localhost:4243/images/json');
+            var images = HTTP.get('http://172.17.42.1:4243/images/json');
             Images.remove({});
             images.data.forEach(function(image) {
                 Images.insert(image);
@@ -30,12 +30,12 @@ if (Meteor.isServer) {
         },
         createContainer: function(Id) {
             var params = {"Image":Id};
-            HTTP.post('http://localhost:4243/containers/create', {
+            HTTP.post('http://172.17.42.1:4243/containers/create', {
                 "data": params
             });
         },
         startContainer: function() {
-            HTTP.get('http://localhost:4243/images/json');
+            HTTP.get('http://172.17.42.1:4243/images/json');
             console.log('running a container');
         },
         stopContainer: function() {
