@@ -1,0 +1,37 @@
+<head>
+  <title>Socker</title>
+</head>
+
+<body>
+  <h1>Socker</h1>
+  <p>Control your containers</p>
+  {{> images}}
+  {{> containers}}
+</body>
+
+<template name="images">
+    <h2>Docker images</h2>
+    <p>Available on this server...</p>
+    <ul>
+    {{#each imagesList}}
+        <li>
+        {{repository}} {{tag}} ({{image_id}}, {{virtual_size}})
+            <input type="text" name="command" data-id="{{image_id}}" placeholder="-d">
+            <input class="run" type="button" name="start" data-id="{{image_id}}" value="Run!">
+        </li>
+    {{/each}}
+    </ul>
+    <input type="button" id="refresh-images" value="Refresh">
+</template>
+
+<template name="containers">
+    <h2>Containers</h2>
+    <ul>
+      {{#each containersList}}
+          <li>
+            <!--{{repository}} {{tag}} ({{image_id}}, {{virtual_size}})-->
+              <!--<input type="button" name="start" data-id="{{image_id}}" value="Run">-->
+          </li>
+      {{/each}}
+    </ul>
+</template>
