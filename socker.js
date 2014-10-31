@@ -1,20 +1,11 @@
-Images = new Mongo.Collection('images');
-Containers = new Mongo.Collection('containers');
+Images = new Mongo.Collection("images");
 
 if (Meteor.isClient) {
-    Template.images.helpers({
-        imagesList: function () {
-            return Images.find();
-        }
-    });
-    Template.images.events({
-        'click input#refresh-images': function () {
-            Meteor.call('getImages');
-        },
-        'click input.create': function() {
-            Meteor.call('createContainer', this.Id);
-        }
-    });
+  Template.body.helpers({
+    images: function () {
+      return Images.find({});
+    }
+  });
 }
 
 if (Meteor.isServer) {
