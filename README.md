@@ -3,3 +3,9 @@
 - implement stopping containers
 - implement reloading containers
 - implement other funny stuff
+- 
+Team: 
+Jaroslav
+Stefano
+Monique
+Roberto
