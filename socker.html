@@ -1,37 +1,87 @@
 <head>
-  <title>Socker</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Socker">
+    <meta name="author" content="MdH,Jrslv,Roberto,Federico">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Socker</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
-  <h1>Socker</h1>
+
+<div class="container">
+
+<!-- {{>navigation}} -->
+
+<h1>Socker</h1>
   <p>Control your containers, yo</p>
-  {{> images}}
-  {{> containers}}
+
+  <ul>
+      {{#each images}}
+        {{> image}}
+      {{/each}}
+  </ul>
+
+  <!-- <ul>
+    {{#each containers}}
+     {{> container}}
+    {{/each}}
+  </ul> -->
+
+</div>
+
+
+
+<!-- Bootstrap core JavaScript
+   ================================================== -->
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="../../dist/js/bootstrap.min.js"></script>
+   <script src="../../assets/js/docs.min.js"></script>
+   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+   <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
 </body>
 
-<template name="images">
-    <h2>Docker images</h2>
-    <p>Available on this server...</p>
-    <ul>
-    {{#each imagesList}}
-        <li>
-        {{RepoTags}}, {{Id}}, {{Created}}
-            <input type="text" name="command" placeholder="-d">
-            <input class="create" type="button" name="create" value="Create container!">
-        </li>
-    {{/each}}
-    </ul>
-    <input type="button" id="refresh-images" value="Refresh">
-</template>
+  <template name="image">
+    <li><h1>{{imageId}}, </h1></li>
+    <li>{{createdAt}},</li>
+    <li> status:{{status}},</li>
+    <li> userId: {{user_id}},</li>
+    <li> started at: {{startedAt}},</li>
+    <li>  stopped at: {{stoppedAt}}, </li>
+    <li> CPU Utilization: {{CPU_Utilization}}</li>
+    <li> Disk Reads: {{diskReads}}</li>
+    <li> Disk Read Operations: {{diskReadOperations}}</li>
+    <li> Disk Wries: {{diskWrites}}</li>
+    <li> Disk Write Operations: {{diskWriteOperations}}</li>
+    <li> Network In {{networkIn}} </li>
+    <li> Network Out {{networkOut}} </li>
+    <li> Status Check Failed (any): {{statusCheckFailedAny}} </li>
+    <li> Status Check Failed (instance): {{statusCheckFailedInstance}} </li>
+    <li> Status Check Failed (system): {{statusCheckFailedSystem}} </li>
 
-<template name="containers">
-    <h2>Containers</h2>
-    <ul>
-      {{#each containersList}}
-          <li>
-            <!--{{repository}} {{tag}} ({{image_id}}, {{virtual_size}})-->
-              <!--<input type="button" name="start" data-id="{{image_id}}" value="Run">-->
-          </li>
-      {{/each}}
-    </ul>
-</template>
+
+  </template>
+
+
+
+ <template name="containers">
+   <h1>hallo 2</h1>
+   <li>{{containers}}</li>
+ </template>
